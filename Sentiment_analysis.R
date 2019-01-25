@@ -1,8 +1,7 @@
 library(tm)
 library(igraph)
 twitter_data<-read.csv("result5.csv", header = TRUE)
-#twitter_data = read.table(file="~/result5.csv", header=TRUE,sep=",",encoding="UTF-8", stringsAsFactors = FALSE)
-#twitter_data$text = paste(substr(twitter_data$text,2,nchar(twitter_data$text)))
+
 # We may need to remove the first charactore 'b' from the string.
 
 text = twitter_data$text
@@ -12,11 +11,6 @@ text_clean = gsub("[[:punct:]]", "", text_clean)
 text_clean = gsub("[[:digit:]]", "", text_clean)
 text_clean = gsub("http\\w+", "", text_clean)
 
-#text_corpus = Corpus(VectorSource(text_clean))
-#text_corpus = tm_map(text_corpus, tolower)
-#text_corpus = tm_map(text_corpus, removeWords, c(stopwords("english"), "olympics"))
-#text_corpus = tm_map(text_corpus, stripWhitespace)
-#text_corpus = tm_map(text_corpus, PlainTextDocument)
 
 text_corpus <- VCorpus(VectorSource(text_clean))
 text_corpus=tm_map(text_corpus, content_transformer(tolower))
